@@ -1,0 +1,52 @@
+<div class="menu">
+    <div class="menu-button" [ngClass]="showApiCards ? '' : 'selected'" (click)="changeMenu(false)">
+        Exibir Deck
+    </div>
+    <div class="menu-button" [ngClass]="!showApiCards ? '' : 'selected'" (click)="changeMenu(true)">
+        Listar Cartas
+    </div>
+</div>
+<div class="flex" *ngIf="!showApiCards">
+    <div class="flex overflow" *ngIf="cards != null && cards.length > 0">
+        <div *ngFor="let card of cards">
+            <card [card]="card" (click)="selectCard(card)"></card>
+        </div>
+    </div>
+</div>
+<input *ngIf="list != null && list.length > 0" type="button" value="Abrir Pack de Cartas" (click)="openCardPack()">
+<input *ngIf="cards != null && cards.length > 0" type="button" value="Limpar Deck" (click)="deleteAll()">
+<div class="flex " *ngIf="showApiCards">
+    <p *ngIf="loadingList">Carregando!!</p>
+    <div class="flex overflow" *ngIf="list != null && list.length > 0">
+        <div *ngFor="let card of list">
+            <card [card]="card" (click)="selectCard(card)"></card>
+        </div>
+    </div>
+</div>
+<div>
+</div>
+
+<div class="modal" *ngIf="selectedCard != null && showModal">
+    <div class="content">
+        <div class="top" (click)="removeModal()">
+            X
+        </div>
+        <card [card]="selectedCard"></card>
+        <div class="actions">
+            <input *ngIf="showApiCards" type="button" value="Add Card" (click)="adicionarCard()">
+            <input *ngIf="!showApiCards" type="button" value="Remove Card" (click)="deleteCard(selectedCard)">
+        </div>
+    </div>
+
+</div>
+
+<div class="modal" *ngIf="hasError">
+    <div class="error-content">
+        <div class="top" (click)="hasError = false">
+            X
+        </div>
+        <div class="message">
+            {{errorMessage}}
+        </div>
+    </div>
+</div>

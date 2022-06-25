@@ -1,0 +1,16 @@
+img {
+    max-width: 180px;
+}
+
+.card {
+    max-width: 220px;
+    background: black;
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    margin: 0 20px 20px 20px;
+    .card-title {
+        margin-bottom: 20px;
+    }
+}
