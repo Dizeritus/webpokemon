@@ -1,0 +1,7 @@
+<div class="lista">
+    <div class="flex overflow" *ngIf="list != null && list.length > 0">
+        <div *ngFor="let card of list">
+            <card [card]="card"></card>
+        </div>
+    </div>
+</div>

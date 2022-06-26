@@ -14,15 +14,17 @@ export class CardsComponent implements OnInit {
     public list: any[] = [];
     public selectedCard!: Card;
     errorMessage = '';
-    showApiCards = false;
+    mostrarDeck = false;
     loadingDeck = false;
     loadingList = false;
     showModal = false;
     hasError = false;
-
     constructor(private http: HttpClient, private sanitizer: DomSanitizer, private cardService: CardService) {
 
     }
+
+
+    
     openCards(posicoes: number[]) {
         if (posicoes.length < 1) this.getCards();
 
@@ -128,7 +130,7 @@ export class CardsComponent implements OnInit {
         } else {
             this.getCards();
         }
-        this.showApiCards = show;
+        this.mostrarDeck = show;
     }
 
     selectCard(card: Card) {

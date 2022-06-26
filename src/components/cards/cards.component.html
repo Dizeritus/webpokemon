@@ -1,30 +1,26 @@
 <div class="menu">
-    <div class="menu-button" [ngClass]="showApiCards ? '' : 'selected'" (click)="changeMenu(false)">
+    <div class="menu-button" [ngClass]="!mostrarDeck ? '' : 'selected'" (click)="changeMenu(true)">
         Exibir Deck
     </div>
-    <div class="menu-button" [ngClass]="!showApiCards ? '' : 'selected'" (click)="changeMenu(true)">
+    <div class="menu-button" [ngClass]="mostrarDeck ? '' : 'selected'" (click)="changeMenu(false)">
         Listar Cartas
     </div>
 </div>
-<div class="flex" *ngIf="!showApiCards">
-    <div class="flex overflow" *ngIf="cards != null && cards.length > 0">
-        <div *ngFor="let card of cards">
-            <card [card]="card" (click)="selectCard(card)"></card>
-        </div>
-    </div>
+
+
+<div class="flex" *ngIf="mostrarDeck">
+    <aba_lista [list]="cards"></aba_lista>
 </div>
-<input *ngIf="list != null && list.length > 0" type="button" value="Abrir Pack de Cartas" (click)="openCardPack()">
-<input *ngIf="cards != null && cards.length > 0" type="button" value="Limpar Deck" (click)="deleteAll()">
-<div class="flex " *ngIf="showApiCards">
+
+<div class="flex " *ngIf="!mostrarDeck">
     <p *ngIf="loadingList">Carregando!!</p>
-    <div class="flex overflow" *ngIf="list != null && list.length > 0">
+    <div class="lista overflow" *ngIf="list != null && list.length > 0">
         <div *ngFor="let card of list">
             <card [card]="card" (click)="selectCard(card)"></card>
         </div>
     </div>
 </div>
-<div>
-</div>
+
 
 <div class="modal" *ngIf="selectedCard != null && showModal">
     <div class="content">
@@ -33,8 +29,8 @@
         </div>
         <card [card]="selectedCard"></card>
         <div class="actions">
-            <input *ngIf="showApiCards" type="button" value="Add Card" (click)="adicionarCard()">
-            <input *ngIf="!showApiCards" type="button" value="Remove Card" (click)="deleteCard(selectedCard)">
+            <input *ngIf="!mostrarDeck" type="button" value="Add Card" (click)="adicionarCard()">
+            <input *ngIf="mostrarDeck" type="button" value="Remove Card" (click)="deleteCard(selectedCard)">
         </div>
     </div>
 
